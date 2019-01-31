@@ -5,7 +5,28 @@ var ctx = c.getContext("2d");
 //ctx.fillStyle = "#FF0000";
 //ctx.fillRect(10, 10, 10, 10);
 
-//Clea Rect function
+//Clear Rect function
 document.getElementById("clear").addEventListener("click", function() {
-  ctx.clearRect(0, 0, c.width, c.height); 
+  ctx.clearRect(0, 0, c.width, c.height);
+});
+
+//toggle Button Name
+document.getElementById("toggle").addEventListener("click", function() {
+  if (document.getElementById("toggle").innerHTML =="Rect"){
+    document.getElementById("toggle").innerHTML = "Dot";
+  }
+  else
+  {
+    document.getElementById("toggle").innerHTML = "Rect";
+  }
+});
+
+//Toggle Bwtn displaying button and dot
+document.getElementById("slate").addEventListener("click", function(ev) {
+  if (document.getElementById("toggle").innerHTML =="Rect"){
+    ctx.fillRect(ev.clientX - c.offsetLeft, ev.clientY - c.offsetTop, 100, 200);
+  }
+  else if(document.getElementById("toggle").innerHTML == "Dot"){
+    ctx.fillRect(ev.clientX - c.offsetLeft, ev.clientY - c.offsetTop, 5, 5);
+  }
 });
