@@ -1,4 +1,4 @@
-var c = document.getElementById("slate);
+var c = document.getElementById("slate");
 var ctx = c.getContext("2d");
 
 //Code from class
