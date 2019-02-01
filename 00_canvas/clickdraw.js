@@ -1,3 +1,8 @@
+//Ryan aday
+//SoftDev2 pd8
+//K00> --  I See a Red Door...
+//2019-01-31
+
 var c = document.getElementById("slate");
 var ctx = c.getContext("2d");
 
