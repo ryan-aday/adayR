@@ -8,6 +8,7 @@ var ctx = c.getContext("2d");
 //Clear Rect function
 document.getElementById("clear").addEventListener("click", function() {
   ctx.clearRect(0, 0, c.width, c.height);
+  ctx.clearArc(0, 0, c.width, c.height);
 });
 
 //toggle Button Name
@@ -29,6 +30,7 @@ document.getElementById("slate").addEventListener("click", function(e) {
     ctx.fillStyle = "red";
     ctx.fill();
   }
+  //beginPath initiates canvas to be changed
   //offsetX and offsetY take x and y coords of cursor
   else if(document.getElementById("toggle").innerHTML == "Dot"){
     ctx.beginPath();
