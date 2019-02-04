@@ -1,18 +1,13 @@
-//Ryan Aday
+//Team Terrible Trio -- Hasif Ahmed, Raunak Chowdhury, Ryan Aday
 //SoftDev2 pd8
-//K02 --  ...and I want to Paint It Better
-//2019-02-01
+//K02 -- Connecting the Dots
+//2019-02-04
 
 
 var c = document.getElementById("playground");
 var ctx = c.getContext("2d");
 
 var counter=0;
-
-
-//Code from class
-//ctx.fillStyle = "#FF0000";
-//ctx.fillRect(10, 10, 10, 10);
 
 //Clear Rect function
 function isCanvasBlank(canvas) {
@@ -30,28 +25,28 @@ document.getElementById("clear").addEventListener("click", function() {
       //triggered if the modulo was 0
     ctx.preventDefault();
   }
-      ctx.clearRect(0, 0, c.width, c.height);
-      ctx.clearArc(0, 0, c.width, c.height);
+  ctx.beginPath();
+  ctx.clearRect(0, 0, c.width, c.height); //clear rectangle
 });
-
-
-
 
 //Toggle Bwtn displaying button and dot
 document.getElementById("playground").addEventListener("click", function(e) {
-    var x=e.offsetX
-    var y=e.offsetY
 
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, 2*Math.PI);
+    //ctx.beginPath();
+    ctx.arc(e.offsetX, e.offsetY, 5, 0, 2*Math.PI);
     ctx.fillStyle = "red";
-
-    //ctx.moveTo(e.offsetX, e.offsetY);
-    ctx.lineTo(e.offsetX+20, e.offsetY+20);
     ctx.closePath();
-
     ctx.fill();
     ctx.stroke();
+    ctx.moveTo(e.offsetX, e.offsetY);
+
+
+    //ctx.lineTo(e.offsetX+20, e.offsetY+20);
+    //replcing moveTo with lineTo fills in shapes.
+    //I suspect it's because the lineTo function actively
+    //tries to connect the given point to all other points in same canvas.
+
+
   //beginPath initiates canvas to be changed
   //offsetX and offsetY take x and y coords of cursor
 
