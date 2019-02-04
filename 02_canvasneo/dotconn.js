@@ -16,7 +16,7 @@ var counter=0;
 
 //Clear Rect function
 function isCanvasBlank(canvas) {
-    var blank = document.createElement('playground');
+    var blank = document.createElement('canvas');
     blank.width = canvas.width;
     blank.height = canvas.height;
 
@@ -35,20 +35,23 @@ document.getElementById("clear").addEventListener("click", function() {
 });
 
 
+
+
 //Toggle Bwtn displaying button and dot
 document.getElementById("playground").addEventListener("click", function(e) {
+    var x=e.offsetX
+    var y=e.offsetY
 
     ctx.beginPath();
-    ctx.arc(e.offsetX, e.offsetY, 5, 0, 2*Math.PI);
+    ctx.arc(x, y, 5, 0, 2*Math.PI);
     ctx.fillStyle = "red";
-    ctx.fill();
 
-    ctx.stroke();
-
-    ctx.moveTo(e.offsetX, e.offsetY);
+    //ctx.moveTo(e.offsetX, e.offsetY);
+    ctx.lineTo(e.offsetX+20, e.offsetY+20);
     ctx.closePath();
-    ctx.lineTo(e.offsetX, e.offsetY);
-    
+
+    ctx.fill();
+    ctx.stroke();
   //beginPath initiates canvas to be changed
   //offsetX and offsetY take x and y coords of cursor
 
