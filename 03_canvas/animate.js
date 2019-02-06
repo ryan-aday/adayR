@@ -1,3 +1,9 @@
+//Team R&R -- Raunak Chowdhury, Ryan Aday
+//SoftDev2 pd8
+//K03 --  Connecting the Dots
+//2019-02-06
+
+//NOTES FRom 2-6-19
 //window.requestAnimationFrame)
 //*executes on next available screen repaint
 //(ensures browser+hardware ready)
@@ -18,50 +24,50 @@
 //var c=document.getElementById
 
 var canvas = document.getElementById("playground");
-var clear = document.getElementById("playground");
+var clear = document.getElementById("clear");
 var dotButton = document.getElementById('circle');
 var stopButton = document.getElementById('stop');
-var ctx = c.getContext("2d");
+var ctx = canvas.getContext("2d");
 
-var requestID; var radius=5; var growing=5;
+var requestID;
+var radius=10;
+var growing=0;
 
-//Clear Rect function
-function isCanvasBlank(canvas) {
-    var blank = document.createElement('canvas');
-    blank.width = canvas.width;
-    blank.height = canvas.height;
+ctx.fillStyle="#00ff00"
 
-    return canvas.toDataURL() == blank.toDataURL();
+var clear_C= function(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height); //clear rectangle
 }
 
-var clear= function(e){}
-
-document.getElementById("clear").addEventListener("click", function() {
-  if (isCanvasBlank(c))
-    {
-      //prevent dafault event from happening- in this case, the event
-      //triggered if the modulo was 0
-    ctx.preventDefault();
-  }
-  ctx.beginPath();
-  ctx.clearRect(0, 0, c.width, c.height); //clear rectangle
-});
-
 var drawDot= function(){
-  //draw the dotconn
-  ctx.beginPath();
-  ctx.arc(c.width/2, c.height/2, radius, 0, 2*Math.PI);
-  ctx.stroke();
-  ctx.fill;
-  ctx.requestAnimationFrame("circle")
+  //Alters growing so that if past canvas bounds is negated to reverse direction
+  if (growing == 10 && radius >= canvas.width/2){
+    growing = -10;
+  }
+  else if (growing == -10 && radius <= 0){
+    growing = 10;
+  }
+  radius += growing;
 
-  radius= radius+growing;
+  clear_C();
+  ctx.beginPath();
+  ctx.arc(canvas.width/2, canvas.height/2, radius, 0, 2*Math.PI);
+  ctx.stroke();
+  ctx.fill();
   requestID=window.requestAnimationFrame(drawDot);
 };
 
-var stopIt=function(){
+var stopIt = function(){
+  window.cancelAnimationFrame(requestID);
+  growing=0;
   console.log(requestID);
-}
+};
 
-dotButton.addEventListener("click", drawDot);
-stopButton.addEventListener("click", stopIt);
+dotButton.addEventListener('click', function(e){
+  if(growing==0){
+    growing=10;
+    drawDot();
+  }
+});
+
+stopButton.addEventListener('click', stopIt);
