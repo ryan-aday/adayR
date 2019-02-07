@@ -1,32 +1,7 @@
-//var logo=new Image();
-//logo.src="logo_dvd.jpg";
-
-//ctx.drawImage(?);
-
 //Team R&R -- Raunak Chowdhury, Ryan Aday
 //SoftDev2 pd8
-//K03 --  Connecting the Dots
+//K03 --  What Is It Saving the Screen From?
 //2019-02-06
-
-//NOTES FRom 2-6-19
-//window.requestAnimationFrame)
-//*executes on next available screen repaint
-//(ensures browser+hardware ready)
-//pauses for background tabs, hiddeen frames, etc.
-//is automaticallly passed a timestamp to mark call setTimeout(function () {
-//Returns nonzero integer (can be used as ID)
-//60fps (target)
-//can be optimized by browser (smoother animations
-//more resource efficient
-//syntax: requestAnimationFrame(callback
-
-//window.cancelAnimationFrame()
-//*stops animations
-//*syntax: cancelAnimationFrame(id)
-
-//model for html5
-
-//var c=document.getElementById
 
 var canvas = document.getElementById("playground");
 var clear = document.getElementById("clear");
@@ -45,8 +20,13 @@ var clear_C= function(){
   ctx.clearRect(0, 0, canvas.width, canvas.height); //clear rectangle
 }
 
+
+//Frame flashes if you press both logo and dot buttons wihout the stop button
+//NOTE: Fixed with canccelAnimationFrame
 var drawDot= function(){
   //Alters growing so that if past canvas bounds is negated to reverse direction
+  window.cancelAnimationFrame( requestID );
+
   if (growing == 10 && radius >= canvas.width/2){
     growing = -10;
   }
@@ -78,6 +58,7 @@ dotButton.addEventListener('click', function(e){
 
 
 var dvdLogoSetup= function(){
+  clear_C();
 	window.cancelAnimationFrame(requestID);
 
 	var rectWidth=100;
@@ -86,19 +67,45 @@ var dvdLogoSetup= function(){
 	var rectX=Math.floor(Math.random() * (canvas.width-rectWidth));
 	var rectY=Math.floor(Math.random() * (canvas.height-rectHeight));
 
-	var xVel=1;
-	var yVel=1;
+	var xVel=3;
+	var yVel=3;
 
 	var logo=new Image();
-	logo.src="dvdLogo.png";
+	logo.src="logo_dvd.jpg";
+  //logo.src="dvdLogo.png"
+  //.png files tend to leave a trace, .jpg files dont.
 
-	var dvdLogo = function(){
-		ctx.clearRect(0, 0, canvas.width, canvas.height); //clear rectangle
-		ctx.drawImage(logo, rectX, rectY, rectWidth, rectHeight);
 
-		requestID=window.requestAnimationFrame(dvdLogo);
-	}
+  var dvdLogo = function(){
+    window.cancelAnimationFrame( requestID );
 
-	dvdLogo();
-}
+    if (rectX >= canvas.width - rectWidth){
+      xVel *= -1;
+    }
+    if (rectY >= canvas.height - rectHeight){
+      yVel *= -1;
+    }
+    //These bounds necessary for logo to bounce back
+    //from top and left walls
+
+    if (rectX <= 0){
+      xVel *= -1;
+    }
+    if (rectY <= 0){
+      yVel *= -1;
+    }
+    rectX += xVel;
+    rectY += yVel;
+
+    ctx.drawImage( logo, rectX, rectY, rectWidth, rectHeight );
+    requestID = window.requestAnimationFrame( dvdLogo );
+  };
+dvdLogo();
+};
+
+var dvdLogo = function(){
+  dvdLogoSetup();
+
+};
 stopButton.addEventListener('click', stopIt);
+dvdButton.addEventListener('click', dvdLogoSetup)
