@@ -22,7 +22,7 @@ var clear_C= function(){
 
 
 //Frame flashes if you press both logo and dot buttons wihout the stop button
-//NOTE: Fixed with canccelAnimationFrame
+//NOTE: Fixed with cancelAnimationFrame
 var drawDot= function(){
   //Alters growing so that if past canvas bounds is negated to reverse direction
   window.cancelAnimationFrame( requestID );
