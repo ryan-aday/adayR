@@ -1,7 +1,7 @@
-// Clyde "Thluffy" Sinclair
-// SoftDev pd0
-// K09 -- basic SVG work
-// 2019-03-13w
+// Ryan Aday
+//SoftDev pd07
+//K09 -- basic SVG work
+//2019-03-31
 
 
 var pic = document.getElementById("vimage");
