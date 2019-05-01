@@ -1,0 +1,16 @@
+Heuristics
+-rules of thumb that come from experience
+-probablistic
+
+
+#reduce- list- single value
+*performs "rolling calc" on successive value pairs
+
+from functools import reduce
+reduce((lambda x, y:x*y), [1,2,3,4])
+->24
+
+lambda in Python:
+*must return a value("evaluate to", "collapse to")
+*Should remind you of scheme/racket/lisp
+*conditionals must be in form of python ter
