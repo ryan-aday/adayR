@@ -1,14 +1,15 @@
 import random
 
+#getting rid of txt and replacing it with just f removes the stages
 def make_HTML_heading(f):
     txt=f()
     def inner():
             return '<h1>'+txt+'</h1>'
-    return inner
-
-make_HTML_heading
+    return txt
+#commenting this out removes the tags and non-random return
+#@make_HTML_heading
 def greet():
-    greetings=['hello', 'welcome', 'hi', 'hola']
+    greetings=['hello', 'welcome', 'hi', 'hola', 'bueno', 'oo']
     return random.choice(greetings)
 
 greet_heading=make_HTML_heading(greet)
