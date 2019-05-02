@@ -1,7 +1,8 @@
-# Aaron Li, Jack Lu: LuLians
-# SoftDev2 pd8
-# K06 -- Yummy Mongo Py
-# 2019-02-28
+# Ryan Aday
+# SoftDev pd07
+# K10 -- Mongo
+# 2019-05-01
+
 
 import pymongo
 from pprint import pprint
